@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "noImplicitAny": false, //此配置项可以使 ts 中即使不声明变量类型也可以不报错
+        "module": "es2020",
+        "target": "es5",
+        "jsx": "react",
+        "allowJs": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        /* 如果设为true，编译每个ts文件之后会生成一个js文件和一个声明文件,
+       declaration和allowJs不能同时设为true */
+        //"declaration": true
+    },
+    "include": [
+        "src/**/*","imges.d.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
