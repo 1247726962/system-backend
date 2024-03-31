@@ -24,7 +24,6 @@ export default {
                    window.localStorage.setItem('token',res.data.token)
                    window.location.hash = '/home'
                 }
-                
             })
 
             yield put({ type: 'save' });
