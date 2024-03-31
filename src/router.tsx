@@ -11,10 +11,10 @@ const urlRoute = (urlSet) => {
   })
 }
 urlRoute(urlSet)
-// window.addEventListener('hashchange', (e) => {
-//     console.log('hashchange')
-// })
-
+window.addEventListener('hashchange', (e) => {
+  const token = localStorage.getItem('token');
+  if( !token )   window.location.hash = '/login'
+})
 function RouterConfig({ history }) {
   let region = [1, 2, 3]
   const [current, setCrrent] = useState(0);
