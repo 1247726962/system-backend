@@ -4,7 +4,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
 import { Button, message, Upload, Input } from 'antd';
 import axios from 'axios'
-import action from "../until/action";
+import action from "../until/ajax";
 
 class IndexPage extends React.Component {
   state = {

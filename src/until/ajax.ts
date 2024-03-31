@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const action = axios.create({
+const Ajax = axios.create({
   baseURL: '',
   timeout: 1000,
 
 
 });
 
-action.interceptors.request.use(config => {
+Ajax.interceptors.request.use(config => {
 
   const token = localStorage.getItem('token');
 
@@ -23,4 +23,4 @@ action.interceptors.request.use(config => {
 
 })
 
-export default action
+export default Ajax

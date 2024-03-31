@@ -1,14 +1,15 @@
 import dva from 'dva';
 import '../style/index.scss'
+import urlConfig from './URL';
 
-// 1. Initialize
+//init
 const app = dva();
 
-// 2. Plugins
+// 2. Plugins 使用插件
 // app.use({});
-let model = [  './loginPages/loginModel' ]
+
 // 3. Model
-model.map(i=>{ app.model(require(`${i}`).default); })
+urlConfig.map(i=>{ app.model(require(`${i}`).default); })
 
 // console.log(app.model)
 // 4. Router

@@ -1,9 +1,8 @@
 import React from 'react';
-import { getChildren } from '../until/until';
-// import parameters from '../until/parameters';
-import { useState, useRef, useEffect, lazy, Suspense, createElement } from 'react';
+import { getChildren } from './until/until';
+import { useState, useEffect, createElement } from 'react';
 import { connect } from 'dva';
-import { BackTop, Menu, Button, Alert, Spin } from 'antd';
+import { Menu, Button, Spin } from 'antd';
 import * as Icon from "@ant-design/icons";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
@@ -19,18 +18,7 @@ function getItem(item) {
 }
 
 let items = [
-   { _id: '1', label: '图书类型管理', icon: 'PieChartOutlined', subUrl: '/manage', component: './typeManage' },
-   { _id: '2', label: '图书管理', icon: 'BarChartOutlined', subUrl: '/book', component: './page' },
-   { _id: '3', label: '恶意言论审核', icon: 'DesktopOutlined', subUrl: '/Remarks', component: './IndexPage' },
-   // { _id: '3', label: 'Option 3', icon: 'ContainerOutlined', subUrl: '/c', component: '' },
-   // { _id: 'sub1', label: 'Navigation One', icon: 'MailOutlined' },
-   // { _id: '5', label: 'Option 5', icon: '', pid: 'sub1', subUrl: '/f', component: '' },
-   // { _id: '6', label: 'Option 6', icon: '', pid: 'sub1', subUrl: '/sa', component: '' },
-   // { _id: '7', label: 'Option 7', icon: '', pid: 'sub1', subUrl: '/asd', component: '' },
-   // { _id: '8', label: 'Option 8', icon: '', pid: 'sub1', subUrl: '/asd', component: '' },
-   // { _id: 'sub2', label: 'Navigation Two', icon: 'AppstoreOutlined' },
-   // { _id: '9', label: 'Option 9', icon: '', pid: 'sub2', subUrl: '/asd', component: '' },
-   // { _id: '10', label: 'Option 10', icon: '', pid: 'sub2', subUrl: '/asd', component: '' },
+   { _id: '1', label: '个人学习网站', icon: 'ReadOutlined', subUrl: '/edit', component: './typeManage' }
 ], itemsTree = []
 
 items.map(i => { itemsTree.push(getItem(i)) })
@@ -47,22 +35,22 @@ function Home(props) {
             setComponentC(createElement(component))
             setloading(false)
          })
-         .catch(e=>{ console.log(e) })
+         .catch(e => { console.log(e) })
    }
    useEffect(() => {
 
-      let hash=window.location.hash;
-      if(hash.split('/')[2]){
-         let item = items.find(i => { return '/'+hash.split('/')[2] == i.subUrl })
-         showComponentC(item.component) 
+      let hash = window.location.hash;
+      if (hash.split('/')[2]) {
+         let item = items.find(i => { return '/' + hash.split('/')[2] == i.subUrl })
+         showComponentC(item.component)
          setloading(false)
       } else {
-         let item = itemsTree[0].children||itemsTree[0]
-         showComponentC(item.component) 
+         let item = itemsTree[0].children || itemsTree[0]
+         showComponentC(item.component)
          setloading(false)
       }
    }, [])
-   
+
 
    const toggleCollapsed = () => {
       setCollapsed(!collapsed);
@@ -77,6 +65,7 @@ function Home(props) {
          inlineCollapsed={collapsed}
          items={itemsTree}
          onSelect={(e) => {
+
             setloading(false)
             let item = items.find(i => { return e.key == i._id })
             window.location.hash = '/home' + item.subUrl

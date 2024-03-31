@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { Router, Route, Switch } from 'dva/router';
-import urlSet from './URL';
+import urlConfig from './URL';
 
 let urlSets = []
 const urlRoute = (urlSet) => {
@@ -10,14 +10,12 @@ const urlRoute = (urlSet) => {
     urlSets.push(<Route path={i.url} component={i.component} />)
   })
 }
-urlRoute(urlSet)
+urlRoute(urlConfig)
 window.addEventListener('hashchange', (e) => {
   const token = localStorage.getItem('token');
   if( !token )   window.location.hash = '/login'
 })
 function RouterConfig({ history }) {
-  let region = [1, 2, 3]
-  const [current, setCrrent] = useState(0);
   return (
     <Router history={history}>
       <Switch>
