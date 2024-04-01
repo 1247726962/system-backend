@@ -1,5 +1,6 @@
 import dva from 'dva';
-import '../style/index.scss'
+import '../style/index.scss';
+import '@wangeditor/editor/dist/css/style.css';
 import urlConfig from './URL';
 
 //init
@@ -9,7 +10,9 @@ const app = dva();
 // app.use({});
 
 // 3. Model
-urlConfig.map(i=>{ app.model(require(`${i}`).default); })
+urlConfig.map(i=>{ 
+    if(i.model) app.model(require(`${i.model}`).default); 
+})
 
 // console.log(app.model)
 // 4. Router

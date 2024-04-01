@@ -2,7 +2,7 @@ const path = require('path') // 处理绝对路径
 const HtmlWebpackPlugin = require('html-webpack-plugin');//预定义模板插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');//使输出的css文件以单独的文件存在
 module.exports = {
-  watch:true,
+  watch: true,
   mode: 'development',
   // mode: 'production',//生产压缩
   entry: path.join(__dirname, '/src/index.tsx'), // 入口文件
@@ -41,10 +41,15 @@ module.exports = {
     historyApiFallback: true, //不跳转
     proxy: {
       '/api': {
-          target: 'http://121.199.60.80:3000',
-          secure: false, 
-          changeOrigin: true
-      }
+        target: 'http://localhost:3000',
+        secure: false,
+        changeOrigin: true
+      },
+      '/blog': {
+        target: 'http://localhost:3000',
+        secure: false,
+        changeOrigin: true
+      },
     }
   },
   module: {

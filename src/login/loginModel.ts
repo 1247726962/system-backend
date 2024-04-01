@@ -15,7 +15,7 @@ export default {
                 message.error('用户名不能为空')
                 return
             }
-            if( user.password!='qwerty' ) {
+            if( !user.password ) {
                 message.error('密码不能为空')
                 return
             }

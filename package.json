@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@wangeditor/editor": "5.1.23",
+    "@wangeditor/editor-for-react": "1.0.6",
     "antd": "^4.1.0",
     "axios": "^1.6.8",
     "babel-plugin-import": "^1.13.6",
