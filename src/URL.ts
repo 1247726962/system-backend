@@ -1,13 +1,13 @@
-
-import LoginPage from './login/loginPage';
-import Menu from './menu';
-
-import { useState, useRef, useEffect, lazy, Suspense } from 'react';
+import { lazy } from 'react';
 
 /*  路由地址映射，路由及其对应页面文件 */
 let urlConfig = [
-    { url: '/home', component: Menu   },
-    { url: '/login', component: LoginPage  , model: './login/loginModel' },
+    { url: '/', component: lazy(() => import('./boke/note')) },
+    // { url: '/home', component:  lazy( ()=>import( './menu' ) )  },
+    { url: '/login', component: lazy(() => import('./loginPages/loginPage')) },
+    { url: '/editor', component: lazy(() => import('./pages/bokeEditor/editContent')) },
+    { url: '/henye', component: lazy(() => import('./loginPages/loginPage2')) },
+    { url: '/henyeOrders', component: lazy(() => import('./pages/henye/orders')) },
 ]
 
 export default urlConfig

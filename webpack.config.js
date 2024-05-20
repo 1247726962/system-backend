@@ -1,96 +1,139 @@
-const path = require('path') // 处理绝对路径
+const path = require('path'); // 处理绝对路径
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');//预定义模板插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');//使输出的css文件以单独的文件存在
-module.exports = {
-  watch: true,
+const webpackBundleAnalyzer = require('webpack-bundle-analyzer');
+const { FastBackwardFilled } = require('@ant-design/icons');
+
+//本地服务器运行配置
+const devServer = {
+  hot: true,
+  open: true,
+  https: true,//开启使用https协议，https协议比http协议更安全
+  historyApiFallback: true,
+  contentBase: path.join(__dirname, '/dist'), // 本地服务器所加载文件的目录
+  port: '8088', // 设置端口号为8088
+  inline: true, // 文件修改后实时刷新
+  historyApiFallback: true, //不跳转
+  proxy: {
+    '/api': {
+      target: 'http://localhost:3000',
+      secure: false,
+      changeOrigin: true
+    },
+    '/blog': {
+      target: 'http://localhost:3000',
+      secure: false,
+      changeOrigin: true
+    },
+  }
+}
+
+const option = {
+  watch: false,
   mode: 'development',
-  // mode: 'production',//生产压缩
-  entry: path.join(__dirname, '/src/index.tsx'), // 入口文件
-  output: {
-    path: path.join(__dirname, '/dist'), //打包后的文件存放的地方
-    filename: 'bundle.js' //打包后输出文件的文件名
-  },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"], // 配置ts文件可以作为模块加载
-  },
-  // optimization: {
-  //   minimizer: [
-  //     new CssMinimizerPlugin(),
-  //   ],
-  // },//dist中的css是否被压缩
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'index.html',//以index.html为模板
-      // favicon: 'favicon-16x16.png',
-      minify: { //压缩HTML文件
-        removeComments: true, //移除HTML中的注释
-        collapseWhitespace: false //删除空白符与换行符
-      }
-    }),
-    new MiniCssExtractPlugin()
-  ],
-  //本地服务器运行
-  devServer: {
-    hot: true,
-    open: true,
-    https: true,//开启使用https协议，https协议比http协议更安全
-    historyApiFallback: true,
-    contentBase: path.join(__dirname, '/dist'), // 本地服务器所加载文件的目录
-    port: '8088', // 设置端口号为8088
-    inline: true, // 文件修改后实时刷新
-    historyApiFallback: true, //不跳转
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        secure: false,
-        changeOrigin: true
+}
+
+module.exports = (env, argv) => {
+
+  const { mode } = env;
+  if (mode === 'build') {
+    option.mode = 'production' //生产压缩
+  }
+  if (mode === 'serve') {
+    option.mode = 'development' //开发模式
+  }
+  if (mode === 'watch') {
+    option.watch = true
+    option.mode = 'development'
+  }
+
+  return {
+    // ...(mode === 'serve' ? { devServer } : {}),
+    watch: option.watch || false,//开启之后生产模式也可以监听文件变化
+    mode: option.mode,
+    entry: path.join(__dirname, '/src/index.tsx'), // 入口文件
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].bundle.js',
+      chunkFilename: '[name].bundle.js',//懒加载，组件
+    },
+    resolve: {
+      extensions: [".tsx", ".ts", ".js"], // 配置ts文件可以作为模块加载
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        minChunks: 2
       },
-      '/blog': {
-        target: 'http://localhost:3000',
-        secure: false,
-        changeOrigin: true
-      },
-    }
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: path.join(__dirname, 'src'),
-        exclude: /node_modules/
-      },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader',
-        include: path.join(__dirname, 'src'),
-        exclude: /node_modules/
-      },
-      {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.tsx?$/,
-        use: ["babel-loader", "ts-loader"],
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset',//webpack5内置图片处理模块
-        parser: {
-          dataUrlCondition: {
-            maxSize: 10 * 1024//小于10kb的图片被转换成base64字符串
-          }
-        },
-        generator: {
-          filename: 'img/[hash][ext][query]'
+    },
+    plugins: [
+      // new webpackBundleAnalyzer.BundleAnalyzerPlugin(),
+      new webpack.IgnorePlugin({ resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/ }),
+      new HtmlWebpackPlugin({
+        template: 'index.html',//以index.html为模板
+        // favicon: 'favicon.png',
+        minify: { //压缩HTML文件
+          removeComments: true, //移除HTML中的注释
+          collapseWhitespace: false //删除空白符与换行符
         }
-      }
-    ]
+      }),
+      new MiniCssExtractPlugin({
+        filename: "[name].css",
+        chunkFilename: "[id].css",
+      })
+    ],
+
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          include: path.join(__dirname, 'src'),
+          exclude: /node_modules/
+        },
+        {
+          test: /\.jsx$/,
+          loader: 'babel-loader',
+          include: path.join(__dirname, 'src'),
+          exclude: /node_modules/
+        },
+        {
+          test: /\.scss$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.tsx?$/,
+          use: ["babel-loader", "ts-loader"],
+          // use: [{
+          //   loader:'babel-loader',
+          //   options: {
+          //     // presets: ["env", "react", 'stage-0'],
+          //     plugins: [
+          //       ['import', { libraryName: 'antd', style: 'css' }]
+          //     ]
+          //   }
+          // }, "ts-loader"],
+          exclude: /node_modules/,
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset',//webpack5内置图片处理模块
+          parser: {
+            dataUrlCondition: {
+              maxSize: 10 * 1024//小于10kb的图片被转换成base64字符串
+            }
+          },
+          generator: {
+            filename: 'images/[hash][ext][query]'
+          },
+          exclude: /node_modules/
+        }
+      ]
+    }
   }
 }

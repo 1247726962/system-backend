@@ -4,20 +4,27 @@
   "name": "angel",
   "version": "1.0.0",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack-dev-server"
+    "build": "webpack --env mode=build",
+    "serve": "webpack-dev-server --env mode=serve",
+    "watch": "webpack --env mode=watch"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@wangeditor/editor": "5.1.23",
     "@wangeditor/editor-for-react": "1.0.6",
-    "antd": "^4.1.0",
+    "antd": "4.24.12",
+    "antd-dayjs-webpack-plugin": "^1.0.6",
     "axios": "^1.6.8",
     "babel-plugin-import": "^1.13.6",
-    "dva": "^2.4.1",
+    "dom": "^0.0.3",
+    "history": "^5.3.0",
+    "moment": "^2.30.1",
+    "qiniu-js": "^3.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.60.0"
+    "react-router-dom": "^6.23.0",
+    "sass": "^1.60.0",
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
@@ -28,21 +35,17 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "babel-loader": "8.3.0",
-    "babel-plugin-dva-hmr": "^0.3.2",
     "css-loader": "^6.7.3",
     "html-webpack-plugin": "latest",
     "husky": "^0.12.0",
     "mini-css-extract-plugin": "^2.7.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "redbox-react": "^1.4.3",
-    "sass": "^1.60.0",
     "sass-loader": "7.3.1",
     "style-loader": "^3.3.2",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.3",
     "webpack": "^5.78.0",
-    "webpack-cli": "^3.3.12",
+    "webpack-cli": "5.1.4",
     "webpack-dev-server": "^3.11.0"
   }
 }

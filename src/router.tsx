@@ -1,28 +1,32 @@
-import React from 'react';
-import { useState, useRef, useEffect, lazy, Suspense } from 'react';
-import { Router, Route, Switch } from 'dva/router';
-import urlConfig from './URL';
+// import React, { LazyExoticComponent }  from 'react';
+// import { Suspense } from 'react';
+// import urlConfig from './URL';
+// import { message } from 'antd';
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-let urlSets = []
-const urlRoute = (urlSet) => {
-  urlSet.map(i => {
-    // const Component = lazy( ()=>import( i.component ) )
-    urlSets.push(<Route path={i.url} component={i.component} />)
-  })
-}
-urlRoute(urlConfig)
-window.addEventListener('hashchange', (e) => {
-  const token = localStorage.getItem('token');
-  if( !token )   window.location.hash = '/login'
-})
-function RouterConfig({ history }) {
-  return (
-    <Router history={history}>
-      <Switch>
-        {...urlSets}
-      </Switch>
-    </Router>
-  );
-}
 
-export default RouterConfig;
+
+// const LazyImportComponent = (props: {
+//   lazyChildren:LazyExoticComponent<() => JSX.Element>;
+// }) => {
+//   return (
+//     <React.Suspense fallback={<>Loading...</>}>
+//       <props.lazyChildren />
+//     </React.Suspense>
+//   );
+// };
+
+// function RouterConfig() {
+  
+//   return (
+//     // <BrowserRouter>
+//       <Routes>
+//         {router.map(i=>{
+//           return <Route path={i.url}  element={<LazyImportComponent lazyChildren={ React.lazy(() => import(i.component))} />} />
+//         })}
+//       </Routes>
+//     // </BrowserRouter>
+//   );
+// }
+
+// export default RouterConfig;

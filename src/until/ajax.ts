@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 const Ajax = axios.create({
-  baseURL: 'http://localhost:5000/',
+  // baseURL: 'https://flowercat.top/',
+  baseURL: 'http://localhost:8080/',
   timeout: 60000,
 });
 //请求拦截
 Ajax.interceptors.request.use(config => {
 
   const token = localStorage.getItem('token');
-
   // if (!token) return Promise.reject(new Error('no token'))
 
   config.headers['Authorization'] = token; // 让每个请求携带自定义token 请        根据实际情况自行修改
@@ -27,9 +27,9 @@ Ajax.interceptors.response.use((response) => {
   return response;
 
 }, function (error) {
-  
+
   const { response } = error;
-  if (response!==undefined&&response.status == 500 && response.data === "token error") {
+  if (response !== undefined && response.status == 500 && response.data === "token error") {
     window.location.hash = '/login'
     localStorage.removeItem("token");
   }

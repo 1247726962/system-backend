@@ -1,0 +1,81 @@
+.top {
+
+    padding: 20px 50px;
+    background-color: white;
+    box-shadow: 0 0 20px 20px #ededed;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+
+    .login_button {
+        border-radius: 10px !important;
+        background-color: #000000 !important;
+        color: #fff !important;
+        border-color: #000000 !important;
+    }
+
+}
+
+
+
+
+.note_container {
+    display: flex;
+    height: calc(100% - 72px);
+
+    .left_sidebar {
+
+        width: 20%;
+        // height: calc(100% - 60px);
+        height: 100%;
+        padding: 30px;
+        // background-color: white;
+
+        .menu {
+            // min-width: 200px;
+            background-color: white;
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+            border-radius: 15px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            background-color: #fefefeab;
+        }
+
+        .title {
+            font-family: cursive;
+            background-color: #fff;
+            border-bottom: 1px #ededed solid;
+            // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            padding: 10px;
+            border-bottom: 1px #ededed solid;
+            margin: 0px 30px;
+            // margin: 30px;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+    }
+
+    .content {
+
+        width: 100%;
+        // height: calc(100% - 60px);
+        height: 100%;
+        padding: 30px;
+
+        .content_title {
+
+            font-size: 2em;
+            padding: 30px;
+            font-weight: 800;
+            font-family: "微软雅黑", SimSun, serif;
+
+        }
+
+    }
+
+}

@@ -1,22 +1,76 @@
-import dva from 'dva';
-import '../style/index.scss';
-import '@wangeditor/editor/dist/css/style.css';
+import React from 'react';
+import {
+  // createBrowserRouter,
+  createHashRouter,
+  RouterProvider,
+  // Route,
+  // Link,
+} from "react-router-dom";
+import { message } from 'antd';
 import urlConfig from './URL';
 
-//init
-const app = dva();
+import '../style/index.scss';
 
-// 2. Plugins 使用插件
-// app.use({});
+routerGuard()
 
-// 3. Model
-urlConfig.map(i=>{ 
-    if(i.model) app.model(require(`${i.model}`).default); 
+let router = urlConfig.map(i => {
+  return {
+    path: i.url,
+    element: <React.Suspense fallback={<>Loading...</>}>
+      {<i.component />}
+    </React.Suspense>
+  }
 })
 
-// console.log(app.model)
-// 4. Router
-app.router(require('./router').default);
+import('react-dom').then(res => {
+  res.render(
+    <React.StrictMode>
+      <RouterProvider router={createHashRouter(router)} />
+    </React.StrictMode>,
+    document.getElementById('root')
+  )
+})
 
-// 5. Start
-app.start('#root');
+function routerGuard() {
+
+  if (window.location.hash == '#/henyeOrders') {
+
+    let henyeIdentity = window.localStorage.getItem('henyeIdentity')
+    let loginTime = window.localStorage.getItem('loginTime')
+    if (!henyeIdentity || !loginTime) window.location.hash = '/henye'
+    if (loginTime && (new Date().getTime() - Number(loginTime) > 86400000 * 7)) {
+      window.location.hash = '/henye'
+      message.warning('登陆时间超过七天，请重新登录')
+    }
+
+  }
+
+  if (window.location.hash == '#/editor') {
+
+    const token = localStorage.getItem('token');
+    if (!token) window.location.hash = '/login'
+
+  }
+
+  window.addEventListener('hashchange', (e) => {
+
+    if (window.location.hash == '#/henyeOrders') {
+
+      let henyeIdentity = window.localStorage.getItem('henyeIdentity')
+      let loginTime = window.localStorage.getItem('loginTime')
+      if (!henyeIdentity || !loginTime) window.location.hash = '/henye'
+      if (loginTime && (new Date().getTime() - Number(loginTime) > 86400000 * 7)) {
+        window.location.hash = '/henye'
+        message.warning('登陆时间超过七天，请重新登录')
+      }
+      return
+
+    }
+
+    const token = localStorage.getItem('token');
+    if (!token) window.location.hash = '/login'
+
+  })
+}
+
+

@@ -1,0 +1,18 @@
+.cell{
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    .title {
+        font-size: 1.6rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
+        white-space: nowrap;
+    }
+    .other{
+        font-size: 1rem;
+        margin-left: 10px;
+        letter-spacing: 3px;
+    }
+}
+
