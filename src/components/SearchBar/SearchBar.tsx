@@ -1,6 +1,6 @@
 import { DownOutlined, UpOutlined } from '../../until/icon';
 import { Button, Col, Form, Input, Row, Select, DatePicker, Radio } from 'antd';
-import type { FormRule, SelectProps, RadioGroupProps } from 'antd';
+import type { FormRule, SelectProps, RadioGroupProps, ColProps } from 'antd';
 import React, { useState } from 'react';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
 import 'moment/locale/zh-cn';
@@ -13,6 +13,7 @@ interface SearchItem {
   placeholder?: string,
   rules?: Array<FormRule>
   options?: SelectProps['options'] | RadioGroupProps['options']
+  labelCol?: ColProps,
   // Array<{ label: string, value: any }>
 }
 
@@ -27,7 +28,7 @@ interface SearchBarProps {
 
 const AdvancedSearchForm = (props: SearchBarProps) => {
 
-  const { items, onSearch, defaultVlue, style } = props;
+  const { items, onSearch, defaultVlue } = props;
 
   const [expand, setExpand] = useState(false);
   const [form] = Form.useForm();
@@ -101,7 +102,7 @@ const AdvancedSearchForm = (props: SearchBarProps) => {
       className="ant-advanced-search-form"
       onFinish={onFinish}
     >
-      <Row gutter={50} align={'top'}>
+      {/* <Row gutter={50} align={'top'}>
         {expand ? getFields() : getFields().slice(0, 8)}
         <Col span={6} style={{ textAlign: 'left' }}>
           <a
@@ -113,21 +114,13 @@ const AdvancedSearchForm = (props: SearchBarProps) => {
             {expand ? <UpOutlined /> : <DownOutlined />} {expand ? '收起' : '展开'}
           </a>
 
-          <Button style={{ margin: '0 8px 25px 24px' }} type="primary" htmlType="submit">
-            查询
-          </Button>
+          <Button style={{ margin: '0 8px 25px 24px' }} type="primary" htmlType="submit"> 查询 </Button>
+          <Button onClick={() => { form.resetFields(); }} > 重置 </Button>
 
-          <Button
-
-            onClick={() => {
-              form.resetFields();
-            }}
-          >
-            重置
-          </Button>
         </Col>
-      </Row>
-      {/* <Row>
+      </Row> */}
+      <Row gutter={50} align={'top'}>
+        {expand ? getFields() : getFields().slice(0, 8)}
         <Col span={24} style={{ textAlign: 'right' }}>
           <a
             style={{ fontSize: 12 }}
@@ -138,21 +131,11 @@ const AdvancedSearchForm = (props: SearchBarProps) => {
             {expand ? <UpOutlined /> : <DownOutlined />} {expand ? '收起' : '展开'}
           </a>
 
-          <Button style={{ margin: '0 8px 30px 24px' }} type="primary" htmlType="submit">
-            查询
-          </Button>
-
-          <Button
-
-            onClick={() => {
-              form.resetFields();
-            }}
-          >
-            重置
-          </Button>
+          <Button style={{ margin: '0 8px 30px 24px' }} type="primary" htmlType="submit"> 查询</Button>
+          <Button onClick={() => { form.resetFields(); }}> 重置 </Button>
 
         </Col>
-      </Row> */}
+      </Row>
     </Form>
   );
 };

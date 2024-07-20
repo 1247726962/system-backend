@@ -18,6 +18,7 @@ let urlConfig = [
             // { index: true, element: lazy(() => import('./pages/backend/commodity')) },
             { path: 'commodity', element: lazy(() => import('./pages/backend/commodity')) },
             { path: 'test', element: lazy(() => import('./pages/backend/test')) },
+            { path: 'abc', element: lazy(() => import('./pages/backend/test')) },
         ],
     },
 

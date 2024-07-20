@@ -11,9 +11,21 @@ import {
 import { useRef } from 'react';
 
 const itemsTree = [
-   { label: '菜单项一', key: 'item-1', to: 'test' }, // 菜单项务必填写 key
-   { label: '菜单项二', key: 'item-2', to: 'commodity' },
+   { label: <Link to={'test'}>菜单项一</Link>, key: 'item-1', to: 'test' }, // 菜单项务必填写 key
+   { label: <Link to={'commodity'}>菜单项二</Link>, key: 'item-2', to: 'commodity' },
+   {
+      label: '子菜单',
+      key: 'submenu',
+      children: [{ label: <Link to={'abc'}>子菜单项</Link>, key: 'submenu-item-1' }],
+    },
 ];
+
+{/* <Menu.Item><Link to={'test'}>菜单项一</Link></Menu.Item> 
+<Menu.Item><Link to={'commodity'}>菜单项二</Link></Menu.Item>
+<Menu.SubMenu title="子菜单">
+   <Menu.Item><Link to={'abc'}>子菜单项 </Link> </Menu.Item>
+</Menu.SubMenu> */}
+
 let first = true
 function Home(props) {
    const [loading, setloading] = useState(true);
@@ -28,14 +40,14 @@ function Home(props) {
    // let clickHandler = useLinkClickHandler(to)
    // clickHandler(e.domEvent as any)
    // useEffect(() => {
-      // first = false
-      // return () => {
-         // setTimeout(()=>{
+   // first = false
+   // return () => {
+   // setTimeout(()=>{
 
-         // },10)
-         // console.log(123)
-      // }
-      //   return 
+   // },10)
+   // console.log(123)
+   // }
+   //   return 
    // }, [to])
 
    // if (!first) clickHandler(domRef.current as any)
@@ -47,7 +59,7 @@ function Home(props) {
          mode="inline"
          theme="dark"
          inlineCollapsed={collapsed}
-         // items={itemsTree}
+         items={itemsTree}
          onSelect={(e) => {
             // let key = e.key
             // let data = itemsTree.find(i => { return i.key == key })
@@ -56,11 +68,7 @@ function Home(props) {
 
          }}
       >
-         <Menu.Item><Link to={'test'}>菜单项一</Link></Menu.Item> 
-         <Menu.Item><Link to={'commodity'}>菜单项二</Link></Menu.Item>
-         <Menu.SubMenu title="子菜单">
-            <Menu.Item>子菜单项</Menu.Item>
-         </Menu.SubMenu>
+
       </Menu>
       <div style={{ width: !collapsed ? '87%' : '97%', display: 'inline-block', verticalAlign: 'top', height: '100vh', overflow: 'auto' }}>
          {/* <Link to={'test'}>sahdoi</Link> */}
