@@ -32,10 +32,11 @@
         // background-color: white;
 
         .menu {
+            display: inline-block;
             // min-width: 200px;
             background-color: white;
             height: 100%;
-            width: 100%;
+            width: calc(100% - 2px);;
             overflow: auto;
             border-radius: 15px;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -43,6 +44,7 @@
         }
 
         .title {
+            cursor:pointer;
             font-family: cursive;
             background-color: #fff;
             border-bottom: 1px #ededed solid;

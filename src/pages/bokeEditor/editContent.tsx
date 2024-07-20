@@ -7,12 +7,11 @@ import '@wangeditor/editor/dist/css/style.css';
 import Ajax from '../../until/ajax';
 import { listSort } from '../../until/until';
 
-import Cell from '../../components/cell/cell';
+import Cell from '../../components/Cell/Cell';
 
 function CustomEditor() {
 
   const [editor, setEditor] = useState<IDomEditor | null>(null)
-  // const [html, setHtml] = useState(<p>hello</p>)
   const [str, setStr] = useState('')
   const [images, setImages] = useState([])
 

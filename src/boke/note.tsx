@@ -39,7 +39,7 @@ function Note() {
         <div className='note_container'>
 
             <div className='left_sidebar'>
-
+                {/*  */}
                 <div className='menu'>
                     <div style={{ padding: '20px', fontSize: '26px', fontFamily: 'cursive' }}>王小二知识库</div>
                     {
@@ -52,6 +52,7 @@ function Note() {
                     }
 
                 </div>
+                {/* <div style={{ height: '100%', width: '2px', backgroundColor: '#000000', display:'inline-block', cursor:'w-resize' }} onMouseMove={(e)=>{ console.log(e) }}></div> */}
 
             </div>
 

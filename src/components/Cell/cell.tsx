@@ -1,4 +1,4 @@
-import './style/cell.scss'
+import './Cell.scss'
 import React, { useState } from 'react';
 import { Popover } from 'antd';
 import { FormOutlined, DeleteOutlined } from '../../until/icon';

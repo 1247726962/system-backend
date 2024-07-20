@@ -1,24 +1,36 @@
 import React from 'react';
 import {
-  // createBrowserRouter,
   createHashRouter,
   RouterProvider,
+  // createBrowserRouter,
   // Route,
   // Link,
 } from "react-router-dom";
 import { message } from 'antd';
-import urlConfig from './URL';
+import urlConfig from './router';
 
 import '../style/index.scss';
 
 routerGuard()
 
 let router = urlConfig.map(i => {
+  let children = []
+  if (i.children) {
+    children = i.children.map(o => {
+      return {
+        ...o,
+        element: <React.Suspense fallback={<>Loading...</>}>
+          {<o.element />}
+        </React.Suspense>
+      }
+    })
+  }
   return {
     path: i.url,
     element: <React.Suspense fallback={<>Loading...</>}>
-      {<i.component />}
-    </React.Suspense>
+      {<i.element />}
+    </React.Suspense>,
+    children: children
   }
 })
 

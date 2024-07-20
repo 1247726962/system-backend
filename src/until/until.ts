@@ -56,7 +56,11 @@ export const toChineseNumber = (n) => {
   }
   return result;
 }
-//链表排序
+/* 
+  链表排序,分为:
+  单链表
+  双链表
+*/
 interface OneObject {
   _id: string,
   pre: string,
@@ -85,7 +89,7 @@ export const listSort = (dataArrray: OneObject[] | TwinObject[], mode: 'one' | '
   }
 
   find(first)
-  
+
   return [first, ...result]
 
 }

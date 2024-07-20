@@ -368,13 +368,16 @@ function HenyeOrders() {
                             y: 'calc(100vh*0.5)',
                         }}
                         pagination={{
+                            // showSizeChanger:false,
                             pageSize: pageOption.pageSize,
                             total: total,
                             showTotal: (total) => {
                                 return <>共 {total} 条</>
                             },
                             onChange: async (page, pageSize) => {
-                                await search(searchParam, { pageSize: pageOption.pageSize, pageIndex: page })
+                                // await search(searchParam, { pageSize: pageOption.pageSize, pageIndex: page })
+                                await search(searchParam, { pageSize: pageSize, pageIndex: page })
+                                setPageOption({ pageSize: pageSize, pageIndex: page })
                             }
                         }}
                     />

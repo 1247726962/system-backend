@@ -1,6 +1,6 @@
 @import 'indexPage';
 @import 'boke';
-@import 'login';
+// @import 'login';
 
 * {
   margin: 0;
@@ -8,9 +8,19 @@
   // overflow: hidden;
 }
 
-html,
-body,
-:global(#root) {
+// html,
+// body,
+// :global(#root) {
+//   height: 100%;
+// }
+
+// html,
+// body,
+// #root {
+//   height: 100%;
+// }
+
+html,body {
   height: 100%;
 }
 

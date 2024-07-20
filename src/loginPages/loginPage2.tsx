@@ -1,5 +1,6 @@
 import React from "react";
 import { Input, message } from 'antd';
+import '../../style/loginPages/login.scss';
 
 let user = {
     username: '',

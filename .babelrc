@@ -4,13 +4,17 @@
         "@babel/preset-react"
     ],
     "plugins": [
-        ["@babel/plugin-proposal-object-rest-spread"],
         [
-            "import",{
+            "@babel/plugin-proposal-object-rest-spread"
+        ],
+        [
+            "import",
+            {
                 "libraryName": "antd",
                 // "libraryDirectory": "es",
                 "style": "css"
-            }
+            },
+            "antd"
         ]
     ]
 }

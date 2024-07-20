@@ -10,5 +10,7 @@ export { default as ZoomInOutlined } from '@ant-design/icons/lib/icons/ZoomInOut
 export { default as UploadOutlined } from '@ant-design/icons/lib/icons/UploadOutlined';
 export { default as LoadingOutlined } from '@ant-design/icons/lib/icons/LoadingOutlined';
 export { default as PlusOutlined } from '@ant-design/icons/lib/icons/PlusOutlined';
+export { default as DownOutlined } from '@ant-design/icons/lib/icons/DownOutlined';
+export { default as UpOutlined } from '@ant-design/icons/lib/icons/UpOutlined';
 
 

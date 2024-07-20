@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, message } from 'antd';
-import Ajax from '../until/ajax'
+import Ajax from '../until/ajax';
+import '../../style/loginPages/login.scss';
 
 let user = {
     username: '',
