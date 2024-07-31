@@ -11,22 +11,15 @@ import {
 import { useRef } from 'react';
 
 const itemsTree = [
-   { label: <Link to={'test'}>菜单项一</Link>, key: 'item-1', to: 'test' }, // 菜单项务必填写 key
-   { label: <Link to={'commodity'}>菜单项二</Link>, key: 'item-2', to: 'commodity' },
+   { label: <Link to={'test'}>庄园管理</Link>, key: 'item-1', to: 'test' }, // 菜单项务必填写 key
+   { label: <Link to={'expert'}>农业专家</Link>, key: 'item-2', to: 'expert' },
    {
-      label: '子菜单',
+      label: '测试',
       key: 'submenu',
       children: [{ label: <Link to={'abc'}>子菜单项</Link>, key: 'submenu-item-1' }],
     },
 ];
 
-{/* <Menu.Item><Link to={'test'}>菜单项一</Link></Menu.Item> 
-<Menu.Item><Link to={'commodity'}>菜单项二</Link></Menu.Item>
-<Menu.SubMenu title="子菜单">
-   <Menu.Item><Link to={'abc'}>子菜单项 </Link> </Menu.Item>
-</Menu.SubMenu> */}
-
-let first = true
 function Home(props) {
    const [loading, setloading] = useState(true);
    const [collapsed, setCollapsed] = useState(false);
@@ -71,7 +64,7 @@ function Home(props) {
 
       </Menu>
       <div style={{ width: !collapsed ? '87%' : '97%', display: 'inline-block', verticalAlign: 'top', height: '100vh', overflow: 'auto' }}>
-         {/* <Link to={'test'}>sahdoi</Link> */}
+
          <Outlet />
       </div>
 

@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');//预定义模板插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');//使输出的css文件以单独的文件存在
 const webpackBundleAnalyzer = require('webpack-bundle-analyzer');
-const { FastBackwardFilled } = require('@ant-design/icons');
 
 //本地服务器运行配置
 const devServer = {
@@ -39,6 +38,7 @@ module.exports = (env, argv) => {
   const { mode } = env;
   if (mode === 'build') {
     option.mode = 'production' //生产压缩
+    config.plugins.push(new webpackBundleAnalyzer.BundleAnalyzerPlugin())
   }
   if (mode === 'serve') {
     option.mode = 'development' //开发模式
@@ -48,8 +48,8 @@ module.exports = (env, argv) => {
     option.mode = 'development'
   }
 
-  return {
-    // ...(mode === 'serve' ? { devServer } : {}),
+  var config = {
+    ...(mode === 'serve' ? { devServer } : {}),
     watch: option.watch || false,//开启之后生产模式也可以监听文件变化
     mode: option.mode,
     entry: path.join(__dirname, '/src/index.tsx'), // 入口文件
@@ -136,4 +136,7 @@ module.exports = (env, argv) => {
       ]
     }
   }
+
+  return config
+
 }
