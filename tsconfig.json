@@ -9,12 +9,11 @@
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        /* 如果设为true，编译每个ts文件之后会生成一个js文件和一个声明文件,
-       declaration和allowJs不能同时设为true */
-        //"declaration": true
+        //"declaration": true /* 如果设为true，编译每个ts文件之后会生成一个js文件和一个声明文件,declaration和allowJs不能同时设为true */
     },
     "include": [
-        "src/**/*","imges.d.ts"
+        "src/**/*",
+        "imges.d.ts"
     ],
     "exclude": [
         "node_modules"

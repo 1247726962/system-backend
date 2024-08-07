@@ -9,15 +9,16 @@ let urlConfig = [
     { url: '/login', element: lazy(() => import('./loginPages/loginPage')) },
     { url: '/editor', element: lazy(() => import('./pages/bokeEditor/editContent')) },
 
-    //小程序后台，当阳农汇
+    //小程序后台
     {
         url: '/backend',
         element: lazy(() => import('./pages/backend/meun')),
         children: [
             // { index: true, element: lazy(() => import('./pages/backend/commodity')) },
-            { path: 'manor', element: lazy(() => import('./pages/backend/manor')) },
+            { path: 'manor', element: lazy(() => import('./pages/backend/manor')), index: true },
             { path: 'test', element: lazy(() => import('./pages/backend/test')) },
             { path: 'abc', element: lazy(() => import('./pages/backend/test')) },
+            { path: 'goodsManage', element: lazy(() => import('./pages/backend/goodsManage')) },
         ],
     },
 

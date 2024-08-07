@@ -6,14 +6,16 @@ const webpackBundleAnalyzer = require('webpack-bundle-analyzer');
 
 //本地服务器运行配置
 const devServer = {
+  // contentBase: path.join(__dirname, '/dist'), // 本地服务器所加载文件的目录
+  // inline: true, // 文件修改后实时刷新
   hot: true,
+  port: '8088', // 设置端口号为8088
   open: true,
   https: true,//开启使用https协议，https协议比http协议更安全
-  historyApiFallback: true,
-  contentBase: path.join(__dirname, '/dist'), // 本地服务器所加载文件的目录
-  port: '8088', // 设置端口号为8088
-  inline: true, // 文件修改后实时刷新
   historyApiFallback: true, //不跳转
+  client: {
+    overlay: false
+  },
   proxy: {
     '/api': {
       target: 'http://localhost:3000',
@@ -28,30 +30,16 @@ const devServer = {
   }
 }
 
-const option = {
-  watch: false,
-  mode: 'development',
-}
+
 
 module.exports = (env, argv) => {
 
   const { mode } = env;
-  if (mode === 'build') {
-    option.mode = 'production' //生产压缩
-    config.plugins.push(new webpackBundleAnalyzer.BundleAnalyzerPlugin())
-  }
-  if (mode === 'serve') {
-    option.mode = 'development' //开发模式
-  }
-  if (mode === 'watch') {
-    option.watch = true
-    option.mode = 'development'
-  }
 
   var config = {
     ...(mode === 'serve' ? { devServer } : {}),
-    watch: option.watch || false,//开启之后生产模式也可以监听文件变化
-    mode: option.mode,
+    // watch: false,//开启之后生产模式也可以监听文件变化
+    // mode: 'development',
     entry: path.join(__dirname, '/src/index.tsx'), // 入口文件
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -68,7 +56,6 @@ module.exports = (env, argv) => {
       },
     },
     plugins: [
-      // new webpackBundleAnalyzer.BundleAnalyzerPlugin(),
       new webpack.IgnorePlugin({ resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/ }),
       new HtmlWebpackPlugin({
         template: 'index.html',//以index.html为模板
@@ -135,6 +122,22 @@ module.exports = (env, argv) => {
         }
       ]
     }
+  }
+
+  if (mode === 'build') {
+    // const option = {
+    //   watch: false,
+    //   mode: 'development',
+    // }
+    config.mode = 'production' //生产压缩
+    config.plugins.push(new webpackBundleAnalyzer.BundleAnalyzerPlugin()) //生成依赖图的插件
+  }
+  if (mode === 'serve') {
+    config.mode = 'development' //开发模式
+  }
+  if (mode === 'watch') {
+    config.mode = 'development'
+    config.watch = true
   }
 
   return config

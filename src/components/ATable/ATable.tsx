@@ -8,7 +8,6 @@ import SearchBar from '../SearchBar/SearchBar';
 api:查询接口
 mode：'get'|'post'// 一次全部获取数据|分页
 */
-
 interface ATableProps extends TableProps<any> {
 
     api: string,

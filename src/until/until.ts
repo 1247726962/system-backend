@@ -13,22 +13,6 @@ export function getChildren(arr, _id) {
   return res;
 }
 
-function loadXMLDoc() {
-  var xmlhttp;
-  if (window.XMLHttpRequest) {
-    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-    xmlhttp = new XMLHttpRequest();
-  }
-  else {
-    // IE6, IE5 浏览器执行代码
-    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) { }
-  }
-  xmlhttp.open("GET", "/api/test", true);
-  xmlhttp.send();
-}
 /* 数字转换汉字，例如：1 => 一，102=> 一百零二 */
 export const toChineseNumber = (n) => {
   if (!Number.isInteger(n) && n < 0) {
