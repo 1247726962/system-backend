@@ -10,3 +10,5 @@ antd + react + webpack + sass 开发
 搭配 nginx 使用，采用：npm run watch
 
 压缩，打包(生产)：npm run build
+
+可用于开发企业级产品，和各种从零开发
